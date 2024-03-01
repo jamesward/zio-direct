@@ -42,6 +42,8 @@ trait deferCall[F[_, _, _], F_out, S, W, MM <: MonadModel] {
   @scala.reflect.macros.internal.macroImpl("nothing")
   transparent inline def apply[T](inline value: T): F_out = impl(value, InfoBehavior.Silent, Use, LinReg)
   @scala.reflect.macros.internal.macroImpl("nothing")
+  transparent inline def apply(inline value: Nothing): F_out = impl(value, InfoBehavior.Silent, Use, LinReg)
+  @scala.reflect.macros.internal.macroImpl("nothing")
   transparent inline def info[T](inline value: T): F_out = impl(value, InfoBehavior.Info, Use, LinReg)
   @scala.reflect.macros.internal.macroImpl("nothing")
   transparent inline def verbose[T](inline value: T): F_out = impl(value, InfoBehavior.Verbose, Use, LinReg)

@@ -153,6 +153,20 @@ object BlockSpec extends DeferRunSpec { //
           }
           assertZIO(out.exit)(dies(isSubtype[FooError](anything)))
         }
+      ),
+      suite("nothing")(
+        test("whatever") {
+          val out = defer.apply {
+            ZIO.succeedNow("asdf").run
+          }
+          assertZIO(out)(Assertion.equalTo("asdf"))
+        },
+        test("ZIO[_, _, Nothing].run compiles") {
+          val out = defer {
+            ZIO.fail("asdf").run
+          }
+          assertZIO(out.flip)(Assertion.equalTo("asdf"))
+        }
       )
     )
 }
